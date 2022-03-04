@@ -1,11 +1,10 @@
 class QuestionsController < ApplicationController
   def index
-
+    @questions = Question.all
   end
 
   def show
     @question = Question.find(params[:id])
-    p @question
   end
 
   def new
@@ -14,20 +13,30 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(quetion_params)
-    @question.save
-    redirect_to @question
+    if @question.save
+      redirect_to @question
+    else 
+      render 'new', status: :unprocessable_entity
+    end
   end
 
   def edit
-
+    @question = Question.find(params[:id])
   end
 
   def update
-
+    @question = Question.find(params[:id])
+    if @question.update(quetion_params)
+      redirect_to @question
+    else
+      render 'edit', status: :unprocessable_entity
+    end
   end
 
-  def destory
-
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    redirect_to questions_path
   end
 
   private
