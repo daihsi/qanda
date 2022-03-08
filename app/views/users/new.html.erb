@@ -1,0 +1,34 @@
+<h1>新規ユーザー登録</h1>
+<%= form_with model: @user do | form | %>
+  <% if @user.errors.any? %>
+    <div>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label '名前' %><br>
+    <%= form.text_field :name %>
+  </div>
+ <div>
+    <%= form.label 'メールアドレス' %><br>
+    <%= form.text_field :email %>
+  </div>
+ <div>
+    <%= form.label 'パスワード' %><br>
+    <%= form.password_field :password %>
+  </div>
+ <div>
+    <%= form.label 'パスワード再入力' %><br>
+    <%= form.password_field :password_confirmation %>
+  </div>
+  <div>
+    <%= form.submit 'ユーザー登録' %>
+  </div>
+<% end %><br>
+<%= link_to 'ログインページへ', login_path %>
